@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 import styled from 'styled-components';
 import SEO from "../components/seo"
 import Header from '../components/header';
+import ShopListItem from '../components/shop-list-item';
 import background from '../images/csb_bg.png';
 import coffee from '../images/open-doodles-coffee.png';
 import {colors, spacing, fonts} from '../theme';
@@ -26,13 +27,38 @@ const Hero = ({ className }) => (
 );
 
 
-const IndexPage = ({ className }) => (
+const IndexPage = ({ data, className }) => {
+  const { allCoffeeshops } = data.prismic;
+  const rankedShops = allCoffeeshops.edges.sort((a,b) => a.node.rank - b.node.rank)
+  return (
     <div className={className}>
       <SEO title="Coffee shops of Bath" />
       <Header />
       <Hero></Hero>
-   </div>
-);
+      <div className="PageTitle">
+        <h1>The Rankings</h1>
+        <p>(These are solely my opinions)</p>
+        </div>
+      <div className="ShopListContainer">
+        <ul className="ShopList">
+          {rankedShops.map(({ node }) => {
+            console.log(node)
+            return node.has_rating ? (
+              <ShopListItem
+                key={node._meta.uid}
+                name={node.name[0]}
+                rating={node.rating}
+                feature={node.key_feature[0]}
+                rank={node.rank}
+                summary={node.summary[0]}
+                uid={node._meta.uid}
+                />
+            ) : null;
+          })}
+      </ul>
+      </div>
+   </div>)
+};
 
 export default styled(IndexPage)`
   background-image: url(${background});
@@ -41,12 +67,23 @@ export default styled(IndexPage)`
   background-repeat: repeat-y;
   background-position: center top;
   font-family: ${fonts.family};
+  p {
+    color: ${colors.grey};
+    line-height: 24px;
+    font-size: 16px;
+  }
   .Hero {
     text-align: center;
     width: 100%;
     min-height: 100vh;
     display: flex;
+    margin-bottom: ${spacing.large};
     flex-direction: column;
+    h1 {
+      border-bottom: 3px solid ${colors.blue};
+      padding-bottom: ${spacing.medium};
+      margin: 0 auto ${spacing.large};
+    }
       img {
         margin: 30px auto 20px;
         width: 180px;
@@ -61,25 +98,50 @@ export default styled(IndexPage)`
     font-size: ${fonts.h1};
     margin: 0;
     color: ${colors.blue};
-    border-bottom: 3px solid ${colors.blue};
-    padding-bottom: ${spacing.medium};
-    margin: 0 auto ${spacing.large};
     font-weight: bold;
   }
   h5 {
     color: ${colors.blue};
     font-weight: 700;
   }
-  p {
-    margin: ${spacing.medium} 0 0;
-    color: ${colors.grey};
-    font-size: ${fonts.p};
-
-    line-height: 24px;
-  }
   .HeroText {
     max-width: 480px;
     margin: 0 auto ${spacing.large};
   }
-
+  .PageTitle {
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .ShopListContainer {
+    max-width: 1000px;
+    box-sizing: border-box;
+    margin: ${spacing.xlarge} auto;
+  }
+  .ShopList {
+    box-sizing: border-box;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
 `
+export const query = graphql`
+query allCoffeeshopsQuery {
+  prismic {
+    allCoffeeshops {
+      edges {
+        node {
+          summary
+          name
+          key_feature
+          rating
+          rank
+          has_rating
+          _meta {
+            uid
+          }
+        }
+      }
+    }
+  }
+}`;

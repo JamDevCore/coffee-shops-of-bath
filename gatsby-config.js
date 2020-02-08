@@ -1,3 +1,10 @@
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+const path = require(`path`)
+
 module.exports = {
   siteMetadata: {
     title: `Coffee shops of Bath`,
@@ -12,6 +19,13 @@ module.exports = {
       resolve: 'gatsby-source-prismic-graphql',
         options: {
           repositoryName: 'coffeeshopsofbath', // (REQUIRED, replace with your own)
+          accessToken: process.env.GATSBY_ACCESS_TOKEN,
+          pages: [{ // (optional, builds pages dynamically)
+            type: 'Coffeeshop', 
+            path: '/:uid',        // TypeName from prismic
+            match: '/:uid',  // Pages will be generated under this pattern
+            component: require.resolve('./src/templates/review-template.js'),
+          }],
       }
     },
     `gatsby-plugin-react-helmet`,
@@ -38,16 +52,13 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: 'gatsby-plugin-web-font-loader',
       options: {
-        fonts: [
-          {
-            family: `Playfair Display`,
-            variants: [`400`, `600`, '700', '900']
-          },
-        ],
-      },
-    },
+        google: {
+          families: ['Playfair Display']
+        }
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

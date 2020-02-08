@@ -9,10 +9,13 @@ const colors = {
 const spacing = {
     medium: '15px',
     large: '30px',
+    xlarge: '60px',
+    radius: '3px',
 }
 
 const fonts = {
     h1: '36px',
+    h3: '22px',
     p: '16px',
     family: 'Playfair Display',
 }
