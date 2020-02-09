@@ -8,7 +8,7 @@ import {Home} from 'styled-icons/boxicons-solid/Home';
 import {colors, spacing} from '../theme';
 import sendToAirtable from '../modules/send-to-airtable';
 
-const isBrowser = () => window && typeof window !== 'undefined';
+const isBrowser = () => typeof window !== 'undefined';
 
 const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     const [isHidden, updateIsHidden] = useState(true);
