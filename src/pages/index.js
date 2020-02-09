@@ -9,7 +9,6 @@ import coffee from '../images/open-doodles-coffee.png';
 import {colors, spacing, fonts} from '../theme';
 import {CaretDownCircle} from 'styled-icons/boxicons-solid/CaretDownCircle';
 
-
 const Hero = ({ className }) => (
   <div className="Hero">
     <img src={coffee} alt="Coffee Doodle" />
@@ -28,6 +27,7 @@ const Hero = ({ className }) => (
 
 
 const IndexPage = ({ data, className }) => {
+
   const { allCoffeeshops } = data.prismic;
   const rankedShops = allCoffeeshops.edges.sort((a,b) => a.node.rank - b.node.rank)
   return (

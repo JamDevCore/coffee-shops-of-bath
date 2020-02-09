@@ -15,6 +15,7 @@ const spacing = {
 
 const fonts = {
     h1: '36px',
+    h2: '28px',
     h3: '22px',
     p: '16px',
     family: 'Playfair Display',

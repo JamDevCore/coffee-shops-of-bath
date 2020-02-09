@@ -7,14 +7,78 @@ import coffee from '../images/open-doodles-coffee.png';
 import {colors, spacing, fonts} from '../theme';
 import background from '../images/csb_bg.png';
 import {CaretDownCircle} from 'styled-icons/boxicons-solid/CaretDownCircle';
+import {Coffee} from 'styled-icons/fa-solid/Coffee';
+import {FacebookSquare} from 'styled-icons/fa-brands/FacebookSquare';
+import {Building} from 'styled-icons/fa-solid/Building';
+import {Cake3} from 'styled-icons/remix-fill/Cake3';
 import Feature from '../components/feature';
+import Rating from '../components/rating';
+
+const Selector = styled.section`
+max-width: 1100px;
+margin: 0 auto;
+display: flex;
+padding: 0;
+justify-content: space-between;
+flex-wrap: wrap;
+a {
+    text-decoration: none;
+}
+.SelectorBox {
+    cursor: pointer;
+    width: 230px;
+    margin: ${spacing.medium} ${spacing.large};
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.9);
+    background: white;
+    height: 120px;
+    padding: ${spacing.medium};
+    text-align: center;
+    svg {
+        margin-top: ${spacing.medium};
+        color: ${colors.yellow};
+    }
+    h2 {
+        margin: auto auto;
+        font-weight: bold;
+        font-size: ${fonts.h2};
+        color: ${colors.blue};
+    }
+    a {
+        font-size: 12px;
+        color: ${colors.grey};
+    }
+}
+`;
+
+const Review = ({
+    rating,
+    review,
+    feature,
+    label,
+    id,
+}) => {
+    return (
+        <article id={id} className="Review">
+            <div className="ReviewHeader">
+                <h3>{label}</h3>
+                <Rating rating={rating} noText/>
+            </div>
+           <div className="ReviewFeatureWrapper">
+               <Feature>{feature}</Feature>
+            </div> 
+            {review.map(({ text }) => (
+                <p>{text}</p>
+            ))}
+        </article>
+    )
+}
 
 const Hero = ({
     name,
     summary,
     feature,
+    rating,
 }) => {
-    console.log(feature)
     return (
         <div className="Hero">
         <img src={coffee} alt="Coffee Doodle" />
@@ -24,11 +88,23 @@ const Hero = ({
             <p>{summary}</p>
             <br />
             <Feature>{feature}</Feature>
-        </div>
+            <div className="OverallRating">
+                <Rating rating={rating} />
+            </div>
 
-        <CaretDownCircle size="30" />
+        </div>
+        <p>Find out more</p>
+        <CaretDownCircle size="25" />
     </div>)
 };
+
+const selectors = [{
+    label: 'Coffee', icon: () => <Coffee size="30"/>, review: 'coffee',
+    }, {
+        label: 'Venue', icon: () => <Building size="30"/>, review: 'venue',
+    }, {
+        label: 'Drinks & Food', icon: () => <Cake3 size="30"/>, review: 'food',
+    }];
 
 const ReviewTemplate = ({ className, data }) => {
     const { coffeeshop } = data.prismic;
@@ -41,18 +117,92 @@ const ReviewTemplate = ({ className, data }) => {
           name={coffeeshop.name[0].text}
           summary={coffeeshop.summary[0].text}
           feature={coffeeshop.key_feature[0].text}
+          rating={coffeeshop.rating}
         />
+        <Selector>
+            {selectors.map(({ label, icon, review }) => (
+                <a href={`#${review}`}>
+                <div key={label} className="SelectorBox">
+                    {icon()}
+                    <h2>{label}</h2>
+                    <a href={`/#${label}`}>Read in full</a>
+                </div>
+                </a>
+            ))}
+
+        </Selector>
+        <section className="article-container">
+            <main>
+                {selectors.map(({ label, review }) => {
+
+                    return (
+                    <Review 
+                        key={`${review} - ${label}`}
+                        label={label}
+                        id={review}
+                        rating={coffeeshop[`${review}_rating`]}
+                        review={coffeeshop[`${review}_review`]}
+                        feature={coffeeshop[`${review}_key_feature`][0].text}
+                    />);
+                })}
+            </main>
+            <div className="sidebar-container">
+                <div className="sidebar">
+                    <div className="sidebar-item address">
+                        {coffeeshop.address.map(line => <h5>{line.text}</h5>)}
+                        <a href={coffeeshop.website.url}>{coffeeshop.website.url}</a>
+                        <a href={coffeeshop.facebook_page.url}><FacebookSquare size="30" /></a>
+                    </div>
+                    <div className="sidebar-item loyalty">
+                        <h5>Loyalty Scheme</h5>
+                        <p className="scheme-summary">{coffeeshop.loyalty_scheme_summary[0].text}</p>
+                        <p>{coffeeshop.loyalty_scheme[0].text}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     );
 }
 
 export default styled(ReviewTemplate)`
-background-image: url(${background});
+  background-image: url(${background});
   width: 100%;
   min-height: 100vh;
   background-repeat: repeat-y;
   background-position: center top;
   font-family: ${fonts.family};
+  .article-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: ${spacing.large};
+    display: flex;
+
+        main {
+            display: flex;
+            flex-direction: column;
+        }
+  }
+  .Review {
+      border-radius: ${spacing.radius};
+      max-width: 450px;
+      margin: ${spacing.large};
+      padding: ${spacing.medium} ${spacing.large};
+      background-color: ${colors.blue};
+      color: white !important;
+        p {
+            color: white;
+            margin-top: ${spacing.large};
+        }
+        .ReviewHeader {
+            display: flex;
+        }
+        h3 {
+            font-size: ${fonts.h3};
+            margin-right: ${spacing.medium};
+            margin-bottom: auto 0;
+        }
+  }
   p {
     color: ${colors.grey};
     line-height: 24px;
@@ -66,20 +216,20 @@ background-image: url(${background});
     display: flex;
     margin-bottom: ${spacing.large};
     flex-direction: column;
-    h1 {
-      border-bottom: 3px solid ${colors.blue};
-      padding-bottom: ${spacing.medium};
-      margin: 0 auto ${spacing.large};
-    }
-      img {
-        margin: 30px auto 20px;
-        width: 180px;
-      }
-      svg {
-        color: ${colors.blue};
-        text-align: center;
-        margin: 0 auto;
-      }
+        h1 {
+        border-bottom: 3px solid ${colors.blue};
+        padding-bottom: ${spacing.medium};
+        margin: 0 auto ${spacing.large};
+        }
+        img {
+            margin: 30px auto 20px;
+            width: 180px;
+        }
+        svg {
+            color: ${colors.blue};
+            text-align: center;
+            margin: 0 auto;
+        }
   }
   h1 {
     font-size: ${fonts.h1};
@@ -94,7 +244,58 @@ background-image: url(${background});
   .HeroText {
     max-width: 480px;
     margin: 0 auto ${spacing.large};
+  }
+.OverallRating  {
+    max-width: 320px;
+    margin: ${spacing.medium} auto 0;
+}
+.sidebar-container {
+    box-sizing: border-box;
+    background: transparent;
+    width: 100%;
+    max-width: 500px;
+.sidebar {
+    position: sticky;
+    top: 30px;
+    margin-top: ${spacing.large};   
+    .sidebar-item {
+        border-radius: ${fonts.radius};
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.9);
+        margin-top: ${spacing.medium};
+        padding: ${spacing.large};
+        background: white; 
+        h5 {
+            margin: 3px 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: ${colors.blue};
+        }
+        .scheme-summary {
+            color: ${colors.yellow};
+            font-weight: bold;
+            font-style: italic;
+        }
+        p {
+            font-size: 14px;
+            color: ${colors.blue};
+        }
+        a {
+            font-size: 12px;
+            margin-top: 10px;
+            color: ${colors.grey};
+        }
+        svg {
+            float: right;   
+            color: ${colors.blue};
+        }
+    }
+    }
+}
 `;
+
+
+
+
 
 export const query = graphql`
 query CoffeeShopSingleQuery($uid: String!) {
@@ -114,6 +315,7 @@ query CoffeeShopSingleQuery($uid: String!) {
         rating
         name
         loyalty_scheme
+        loyalty_scheme_summary
         has_rating
         food_review
         key_feature

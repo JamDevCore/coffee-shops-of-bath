@@ -1,9 +1,7 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { Link } from "gatsby"
 import styled from 'styled-components';
 import {colors, spacing, fonts} from '../theme';
-import {Star} from 'styled-icons/fa-solid/Star';
-import {StarHalf} from 'styled-icons/fa-solid/StarHalf';
 import Feature from './feature';
 import Rating from './rating';
 
@@ -26,7 +24,7 @@ console.log(rating)
         <p className="white">{summary.text}</p>
         <div className="ItemFooter">
             <Link to={`/${uid}`}>Read the full report here...</Link>
-            <Rating rating={rating}/>
+            <Rating rating={rating} isWhite/>
         </div>
     </li>
     );
@@ -94,9 +92,5 @@ export default styled(ShopListItem)`
         color: white;
         font-weight: 600;
         margin: auto 0;
-    }
-    svg {
-        color: ${colors.yellow};
-        margin: auto 5px;
     }
 `;

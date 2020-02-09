@@ -7,6 +7,8 @@ import {colors, spacing, fonts} from '../theme';
 const Rating = ({
     className,
     rating,
+    isWhite,
+    noText,
 }) => {
     const stars = [];
     for(let i = 0; i < rating; i += 0.5) {
@@ -14,9 +16,8 @@ const Rating = ({
     };
     return (
 <div className={className}>
-    <p className="text">Overall rating:</p>
+    {!noText && <p className={`text ${isWhite ? 'text-white' : 'text-blue'}`}>Overall rating:</p>}
     {stars.map((star, index) => {
-        console.log(stars.length -1 === index, index % 2 === 0)
         if((index + 1) % 2 === 0) return <Star size="20"/>;
         return index === stars.length - 1 ? <StarHalf size="20" /> : null;
     })}
@@ -25,8 +26,18 @@ const Rating = ({
 
 export default styled(Rating)`
 display: flex;
-.text {
+.text-white {
     color: white;
+}
+.text-blue {
+    color: ${colors.blue};
+}
+.text {
+
     margin-right: ${spacing.medium};
+}
+svg {
+    color: ${colors.yellow} !important;
+    margin: auto 5px !important;
 }
 `;
