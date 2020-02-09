@@ -71,6 +71,7 @@ export default styled(IndexPage)`
     color: ${colors.grey};
     line-height: 24px;
     font-size: 16px;
+    margin-bottom: 10px;
   }
   .Hero {
     text-align: center;

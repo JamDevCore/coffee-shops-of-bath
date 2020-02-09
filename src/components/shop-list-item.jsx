@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import {colors, spacing, fonts} from '../theme';
 import {Star} from 'styled-icons/fa-solid/Star';
 import {StarHalf} from 'styled-icons/fa-solid/StarHalf';
+import Feature from './feature';
+import Rating from './rating';
 
 const ShopListItem = ({
     className,
@@ -14,26 +16,17 @@ const ShopListItem = ({
     rating,
 }) => {
 console.log(rating)
-    const stars = [];
-    for(let i = 0; i < rating; i += 1) {
-        stars.push(1);
-    };
-    console.log(stars)
+
     return (
     <li className={className}>
         <div className="ItemHeader">
             <div className="Left"><h3>{name.text}</h3><span className="Rank">{`No. ${rank}`}</span></div>
-            <span className="Feature">{feature.text}</span>
+            <Feature>{feature.text}</Feature>
         </div>
         <p className="white">{summary.text}</p>
         <div className="ItemFooter">
             <Link to={`/${uid}`}>Read the full report here...</Link>
-            <div className="Rating">
-                <p>Overall rating:</p>
-                {stars.map((star, index) => {
-                    return index === stars.length && star.length % 2 !== 0 ? <StarHalf size="20" /> : <Star size="20"/>
-                })}
-            </div>
+            <Rating rating={rating}/>
         </div>
     </li>
     );
@@ -52,7 +45,7 @@ export default styled(ShopListItem)`
         font-sizeL 14px;
         color: white;
         font-weight: 400;
-        max-width: 70%;
+        max-width: 700px;
         line-height: 24px;
     }
     h3 {
@@ -62,13 +55,7 @@ export default styled(ShopListItem)`
         padding: 0;
         font-weight: 400;
     }
-    .Rating {
-        display: flex;
-        p {
-            color: white;
-            margin-right: ${spacing.medium};
-        }
-    }
+
     .Rank {
         color: ${colors.yellow};
         font-size: ${fonts.p};
