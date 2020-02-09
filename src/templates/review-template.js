@@ -140,7 +140,7 @@ const ReviewTemplate = ({ className, data }) => {
                 <div key={label} className="SelectorBox">
                     {icon()}
                     <h2>{label}</h2>
-                    <a href={`/#${review}`}>Read in full</a>
+                    <a href={`#${review}`}>Read in full</a>
                 </div>
                 </a>
             ))}
