@@ -49,7 +49,6 @@ const ShopListItem = ({
     comingSoon,
     setShowSignup,
 }) => {
-console.log(rating)
 
     return !comingSoon ? (
     <li className={className}>

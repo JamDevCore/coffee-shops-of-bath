@@ -109,7 +109,6 @@ const selectors = [{
 
 const ReviewTemplate = ({ className, data }) => {
     const { coffeeshop } = data.prismic;
-    console.log(coffeeshop);
     return coffeeshop.has_rating && (
     <div className={className}>
         <SEO title={`A detailed review of ${coffeeshop.name[0].text}`} />

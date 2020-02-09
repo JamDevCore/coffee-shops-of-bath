@@ -45,7 +45,6 @@ const IndexPage = ({ data, className }) => {
       <div className="ShopListContainer">
         <ul className="ShopList" id="list">
           {rankedShops.map(({ node }) => {
-            console.log(node)
             return node.has_rating ? (
               <ShopListItem
                 key={node._meta.uid}

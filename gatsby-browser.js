@@ -10,6 +10,5 @@ const setScroll = require('./src/modules/set-scroll');
 
 
 exports.onClientEntry = () => {
-    console.log(window.location)
     setScroll();
   }
