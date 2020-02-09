@@ -1,13 +1,15 @@
-import React from "react"
+import React, {useState} from "react"
 import { Link, graphql } from "gatsby"
 import styled from 'styled-components';
+import {CaretDownCircle} from 'styled-icons/boxicons-solid/CaretDownCircle';
 import SEO from "../components/seo"
 import Header from '../components/header';
 import ShopListItem from '../components/shop-list-item';
 import background from '../images/csb_bg.png';
+import Signup from '../components/signup';
 import coffee from '../images/open-doodles-coffee.png';
 import {colors, spacing, fonts} from '../theme';
-import {CaretDownCircle} from 'styled-icons/boxicons-solid/CaretDownCircle';
+
 
 const Hero = ({ className }) => (
   <div className="Hero">
@@ -27,7 +29,7 @@ const Hero = ({ className }) => (
 
 
 const IndexPage = ({ data, className }) => {
-
+  const [showSignup, setShowSignup] = useState(false);
   const { allCoffeeshops } = data.prismic;
   const totalShops = allCoffeeshops.edges.length;
   const rankedShops = allCoffeeshops.edges.sort((a,b) => (a.node.rank || totalShops) - (b.node.rank || totalShops))
@@ -57,15 +59,18 @@ const IndexPage = ({ data, className }) => {
             ) : <ShopListItem
                   comingSoon
                   name={node.name[0]} 
+                  setShowSignup={setShowSignup}
              />;
           })}
       </ul>
       </div>
+      <Signup revealBar={showSignup} stopRevealBar={setShowSignup}/>
    </div>)
 };
 
 export default styled(IndexPage)`
   background-image: url(${background});
+  padding-bottom: 100px;
   width: 100%;
   min-height: 100vh;
   background-repeat: repeat-y;

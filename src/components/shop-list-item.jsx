@@ -26,14 +26,14 @@ const ComingSoon = styled.li`
         font-style: italic;
     }
     button {
-        background: ${colors.green};
-        padding: 3px 10px;
+        background: ${colors.lightBlue};
+        padding: 5px 15px;
         border-radius: ${spacing.radius};
         cursor: pointer;
         border: none;
         font-weight: bold;
         font-size: 16px;
-        color: white;
+        color: ${colors.blue};
         font-family: 'Playfair Display';
         margin: auto 0 0 auto;
     
@@ -46,7 +46,8 @@ const ShopListItem = ({
     summary,
     uid,
     rating,
-    comingSoon
+    comingSoon,
+    setShowSignup,
 }) => {
 console.log(rating)
 
@@ -66,7 +67,11 @@ console.log(rating)
                 <h3>{name.text}</h3>
                 <p>Full report coming soon...</p>
                 </div>
-                <button className="subscribe">Subscribe for updates</button>
+                <button
+                    onClick={() => setShowSignup(true)}
+                    className="subscribe">
+                        Subscribe for updates
+                    </button>
              </ComingSoon>
     );
 }

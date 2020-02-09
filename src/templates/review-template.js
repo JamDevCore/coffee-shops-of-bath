@@ -13,6 +13,7 @@ import {Building} from 'styled-icons/fa-solid/Building';
 import {Cake3} from 'styled-icons/remix-fill/Cake3';
 import Feature from '../components/feature';
 import Rating from '../components/rating';
+import Signup from '../components/signup';
 
 const Selector = styled.section`
 max-width: 1100px;
@@ -161,11 +162,13 @@ const ReviewTemplate = ({ className, data }) => {
                 </div>
             </div>
         </section>
+        <Signup showByDefault stopRevealBar={() => {}}/>
     </div>
     );
 }
 
 export default styled(ReviewTemplate)`
+  padding-bottom: 150px;
   background-image: url(${background});
   width: 100%;
   min-height: 100vh;
