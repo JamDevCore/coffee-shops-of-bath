@@ -22,6 +22,11 @@ display: flex;
 padding: 0;
 justify-content: space-between;
 flex-wrap: wrap;
+flex-direction: row;
+@media(max-width: 998px) {
+    justify-content: center;
+    flex-direction: column;
+}
 a {
     text-decoration: none;
 }
@@ -32,7 +37,6 @@ a {
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.9);
     background: white;
     height: 120px;
-    padding: ${spacing.medium};
     text-align: center;
     svg {
         margin-top: ${spacing.medium};
@@ -47,6 +51,17 @@ a {
     a {
         font-size: 12px;
         color: ${colors.grey};
+    }
+}
+@media(max-width: 998px) {
+    a {
+        margin: 0;
+        width: 100%;
+    }
+    .SelectorBox {
+        width: 100% !important;
+        max-width: 450px;
+        margin: ${spacing.medium} auto;
     }
 }
 `;
@@ -174,22 +189,41 @@ export default styled(ReviewTemplate)`
   background-position: center top;
   font-family: ${fonts.family};
   .article-container {
+
+    box-sizing: border-box;
     max-width: 1100px;
     margin: 0 auto;
-    padding: ${spacing.large};
     display: flex;
+    @media(max-width: 998px) {
+        flex-wrap: wrap-reverse;
+        main {
+            margin: 0 auto;
+        }
+        .sidebar-container {
+            width: 100%;
+            margin: 0 auto;
+            max-width: 450px;
 
+        }
+    }
         main {
             display: flex;
             flex-direction: column;
         }
   }
   .Review {
+      box-sizing: border-box;
       box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
       border-radius: ${spacing.radius};
       max-width: 450px;
       margin: ${spacing.large};
+      @media(max-width:660px) {
+        margin: ${spacing.large} 0;
+        max-width: 450px;
+        width: 100%;
+    }
       padding: ${spacing.medium} ${spacing.large};
+      
       background-color: ${colors.blue};
       color: white !important;
         p {
@@ -207,7 +241,7 @@ export default styled(ReviewTemplate)`
   }
   p {
     color: ${colors.grey};
-    line-height: 24px;
+    line-height: 26px;
     font-size: 16px;
     margin-bottom: 10px;
   }
@@ -255,8 +289,9 @@ export default styled(ReviewTemplate)`
     box-sizing: border-box;
     background: transparent;
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
 .sidebar {
+
     position: sticky;
     top: 30px;
     margin-top: ${spacing.large};   

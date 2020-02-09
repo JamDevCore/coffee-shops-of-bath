@@ -118,12 +118,32 @@ export default styled(ShopListItem)`
         flex-direction: row;
         justify-content: space-between;
         margin-bottom: ${spacing.medium};
+        @media(max-width:480px) {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            span {
+             margin-right: 30px;
+            }
+            .Left {
+                margin-bottom: 15px;
+            }
+        }
     }
     .ItemFooter {
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        @media(max-width:480px) {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            span {
+             margin-right: 30px;
+            }
+            .Left {
+                margin-bottom: 15px;
+            }
+        }
     }
     .Feature {
         background-color: ${colors.lightBlue};

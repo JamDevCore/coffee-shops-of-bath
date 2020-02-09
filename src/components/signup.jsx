@@ -8,7 +8,7 @@ import {Home} from 'styled-icons/boxicons-solid/Home';
 import {colors, spacing} from '../theme';
 import sendToAirtable from '../modules/send-to-airtable';
 
-const isBrowser = () => typeof window !== 'undefined';
+const isBrowser = () => window && typeof window !== 'undefined';
 
 const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     const [isHidden, updateIsHidden] = useState(true);
@@ -54,7 +54,6 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     return !isHidden ? (
         <div className={className}>
             <button className="close" onClick={() => {
-                console.log('here')
                 setIsClosed(true);
                 stopRevealBar(false);
                 updateIsHidden(true);
@@ -77,6 +76,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
 }
 
 export default styled(Signup)`
+
     width: 100vw;
     box-shadow: 0 2px 4px rgba(0,0,0,0.5);
     position: fixed;
@@ -86,8 +86,28 @@ export default styled(Signup)`
     background-color: ${colors.lightBlue};
     padding: ${spacing.medium};
     display: flex;
-    flex-wrap: wrap;
     box-sizing: border-box;
+    @media(max-width: 768px) {
+        height: 170px;
+        .signup-text {
+            width: 100%;
+            p {
+                font-size: 12px;
+            }
+        }
+        .signup-form {
+            width: 100%;
+            form {
+                width: 100%;
+            }
+        }
+        flex-direction: column;
+        > div {
+            width: 100%;
+            min-width: 100px;
+            margin: 0 auto;
+        }
+    }
     > div {
         width: 50%;
         min-width: 300px;
