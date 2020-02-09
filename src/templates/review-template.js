@@ -95,7 +95,7 @@ const Hero = ({
 
         </div>
         <p>Find out more</p>
-        <CaretDownCircle size="25" />
+        <a href="#review"><CaretDownCircle size="25" /></a>
     </div>)
 };
 
@@ -133,9 +133,8 @@ const ReviewTemplate = ({ className, data }) => {
 
         </Selector>
         <section className="article-container">
-            <main>
+            <main id="review">
                 {selectors.map(({ label, review }) => {
-
                     return (
                     <Review 
                         key={`${review} - ${label}`}
@@ -187,6 +186,7 @@ export default styled(ReviewTemplate)`
         }
   }
   .Review {
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
       border-radius: ${spacing.radius};
       max-width: 450px;
       margin: ${spacing.large};

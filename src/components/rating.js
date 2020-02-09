@@ -18,8 +18,8 @@ const Rating = ({
 <div className={className}>
     {!noText && <p className={`text ${isWhite ? 'text-white' : 'text-blue'}`}>Overall rating:</p>}
     {stars.map((star, index) => {
-        if((index + 1) % 2 === 0) return <Star size="20"/>;
-        return index === stars.length - 1 ? <StarHalf size="20" /> : null;
+        if((index + 1) % 2 === 0) return <Star key={`${index} - ${star}`} size="20"/>;
+        return index === stars.length - 1 ? <StarHalf key={`${index} - ${star}`} size="20" /> : null;
     })}
 </div>)
 };

@@ -23,7 +23,7 @@ const Hero = ({ className }) => (
           on the good stuff.</p>
     </div>
     <h5>Read on to find the best cup of coffee</h5>
-    <CaretDownCircle size="30" />
+    <a href="#list"><CaretDownCircle size="30" /></a>
  </div>
 );
 
@@ -43,7 +43,7 @@ const IndexPage = ({ data, className }) => {
         <p>(These are solely my opinions)</p>
         </div>
       <div className="ShopListContainer">
-        <ul className="ShopList">
+        <ul className="ShopList" id="list">
           {rankedShops.map(({ node }) => {
             console.log(node)
             return node.has_rating ? (

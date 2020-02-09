@@ -6,6 +6,7 @@ import {Linkedin} from 'styled-icons/fa-brands/Linkedin'
 import {FacebookSquare} from 'styled-icons/fa-brands/FacebookSquare';
 import {Home} from 'styled-icons/boxicons-solid/Home';
 import {colors, spacing} from '../theme';
+import sendToAirtable from '../modules/send-to-airtable';
 
 const isBrowser = () => typeof window !== 'undefined';
 
@@ -13,6 +14,25 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     const [isHidden, updateIsHidden] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [isClosed, setIsClosed] = useState(false);
+    const submitForm = (e) => {
+        e.preventDefault();
+        const email = document.querySelector('[name="email"]').value;
+        if(email) {
+            sendToAirtable({
+                fields: { email },
+                airBase: 'appL54UW2jm7wOYzl',
+                table: 'Emails',
+            })
+            .then(res => {
+                localStorage.setItem('csb-newsletter-signup', email);
+                setIsClosed(true);
+                stopRevealBar(false);
+                updateIsHidden(true);
+                return isBrowser ? window.onscroll = undefined : null;
+            })
+            .catch(err =>  console.log(err))
+        }
+    }
     useEffect(() => {
         const toggleBar = () => {
             if ((document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) && !isClosed) {
@@ -47,8 +67,8 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
                 </p> 
             </div>
             <div className="signup-form">
-                <form>
-                    <input placeholder="Your email address..."/>
+                <form onSubmit={(e) => submitForm(e)}>
+                    <input name="email" placeholder="Your email address..."/>
                     <button>Subscribe</button>
                 </form>
             </div>
