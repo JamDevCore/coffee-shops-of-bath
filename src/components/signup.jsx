@@ -8,12 +8,13 @@ import {Home} from 'styled-icons/boxicons-solid/Home';
 import {colors, spacing} from '../theme';
 import sendToAirtable from '../modules/send-to-airtable';
 
-const isBrowser = () => typeof window !== 'undefined';
+const isBrowser = () => typeof window !== 'undefined' && window;
 
 const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     const [isHidden, updateIsHidden] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [isClosed, setIsClosed] = useState(false);
+    console.log(isHidden)
     const submitForm = (e) => {
         e.preventDefault();
         const email = document.querySelector('[name="email"]').value;

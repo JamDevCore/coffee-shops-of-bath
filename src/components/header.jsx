@@ -7,15 +7,11 @@ import {FacebookSquare} from 'styled-icons/fa-brands/FacebookSquare';
 import {Home} from 'styled-icons/boxicons-solid/Home';
 import {colors, spacing} from '../theme';
 
-const getIcon = () => {
-if(typeof window !== 'undefined' && window.location.pathname !== '/') return <Link className="home"><Home size="30"/></Link>
-}
-
 const Header = ({ className }) => (
     <div className={className}>
         <a href="mailto:jamesvitaly1993@gmail.com"><PaperPlane  size="30" /></a>
         <a href="https://www.linkedin.com/in/james-vitaly-harding"><Linkedin  size="30" /></a>
-        {getIcon()}
+        <Link className="home"><Home size="30"/></Link>
     </div>
 );
 
