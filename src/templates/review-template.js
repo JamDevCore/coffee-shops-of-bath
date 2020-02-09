@@ -109,7 +109,7 @@ const selectors = [{
 
 const ReviewTemplate = ({ className, data }) => {
     const { coffeeshop } = data.prismic;
-    return coffeeshop.has_rating && (
+    return coffeeshop.has_rating ? (
     <div className={className}>
         <SEO title={`A detailed review of ${coffeeshop.name[0].text}`} />
         <Header />
@@ -162,7 +162,7 @@ const ReviewTemplate = ({ className, data }) => {
         </section>
         <Signup showByDefault stopRevealBar={() => {}}/>
     </div>
-    );
+    ) : <h1>Coming Soon</h1>
 }
 
 export default styled(ReviewTemplate)`
