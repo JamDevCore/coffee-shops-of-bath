@@ -29,7 +29,8 @@ const Hero = ({ className }) => (
 const IndexPage = ({ data, className }) => {
 
   const { allCoffeeshops } = data.prismic;
-  const rankedShops = allCoffeeshops.edges.sort((a,b) => a.node.rank - b.node.rank)
+  const totalShops = allCoffeeshops.edges.length;
+  const rankedShops = allCoffeeshops.edges.sort((a,b) => (a.node.rank || totalShops) - (b.node.rank || totalShops))
   return (
     <div className={className}>
       <SEO title="Coffee shops of Bath" />
@@ -53,7 +54,10 @@ const IndexPage = ({ data, className }) => {
                 summary={node.summary[0]}
                 uid={node._meta.uid}
                 />
-            ) : null;
+            ) : <ShopListItem
+                  comingSoon
+                  name={node.name[0]} 
+             />;
           })}
       </ul>
       </div>

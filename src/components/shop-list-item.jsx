@@ -5,6 +5,40 @@ import {colors, spacing, fonts} from '../theme';
 import Feature from './feature';
 import Rating from './rating';
 
+const ComingSoon = styled.li`
+    display: flex;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.50);
+    background: white;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100px;
+    border-radius: ${spacing.radius};
+    margin: ${spacing.large} 0;
+    padding: 20px;
+    h3 {
+        color: ${colors.blue};
+        font-size: ${fonts.h3};
+        margin: 0;
+        padding: 0;
+        font-weight: 400;
+    }
+    p {
+        font-style: italic;
+    }
+    button {
+        background: ${colors.green};
+        padding: 3px 10px;
+        border-radius: ${spacing.radius};
+        cursor: pointer;
+        border: none;
+        font-weight: bold;
+        font-size: 16px;
+        color: white;
+        font-family: 'Playfair Display';
+        margin: auto 0 0 auto;
+    
+    }
+`
 const ShopListItem = ({
     className,
     name, rank,
@@ -12,10 +46,11 @@ const ShopListItem = ({
     summary,
     uid,
     rating,
+    comingSoon
 }) => {
 console.log(rating)
 
-    return (
+    return !comingSoon ? (
     <li className={className}>
         <div className="ItemHeader">
             <div className="Left"><h3>{name.text}</h3><span className="Rank">{`No. ${rank}`}</span></div>
@@ -26,7 +61,13 @@ console.log(rating)
             <Link to={`/${uid}`}>Read the full report here...</Link>
             <Rating rating={rating} isWhite/>
         </div>
-    </li>
+    </li>) : (<ComingSoon>
+                <div className="Left">
+                <h3>{name.text}</h3>
+                <p>Full report coming soon...</p>
+                </div>
+                <button className="subscribe">Subscribe for updates</button>
+             </ComingSoon>
     );
 }
 
@@ -40,9 +81,10 @@ export default styled(ShopListItem)`
     margin: ${spacing.large} 0;
     padding: 20px;
     .white {
-        font-sizeL 14px;
+        font-size: 14px;
         color: white;
         font-weight: 400;
+        margin-top: 0;
         max-width: 700px;
         line-height: 24px;
     }
@@ -71,7 +113,7 @@ export default styled(ShopListItem)`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin-bottom: ${spacing.large};
+        margin-bottom: ${spacing.medium};
     }
     .ItemFooter {
         width: 100%;
