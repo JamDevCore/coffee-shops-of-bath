@@ -14,7 +14,6 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     const [isHidden, updateIsHidden] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [isClosed, setIsClosed] = useState(false);
-    console.log(isHidden)
     const submitForm = (e) => {
         e.preventDefault();
         const email = document.querySelector('[name="email"]').value;
@@ -35,7 +34,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
         }
     }
     useEffect(() => {
-        console.log(revealBar, isBrowser, showByDefault, window)
+        console.log(revealBar, isBrowser(), showByDefault, window)
         const toggleBar = () => {
             console.log('here');
             if ((document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) && !isClosed) {
@@ -53,7 +52,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
             window.removeEventListener("scroll", toggleBar);
         }
         return () => window.removeEventListener("scroll", toggleBar);
-    })
+    }, [isHidden, isClosed, revealBar, stopRevealBar ])
     return !isHidden ? (
         <div className={className}>
             <button className="close" onClick={() => {
