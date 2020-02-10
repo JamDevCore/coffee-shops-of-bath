@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react"
+import { Link } from 'gatsby';
 import styled from 'styled-components';
 import {Times} from 'styled-icons/fa-solid/Times';
+import {Linkedin} from 'styled-icons/fa-brands/Linkedin'
+import {FacebookSquare} from 'styled-icons/fa-brands/FacebookSquare';
+import {Home} from 'styled-icons/boxicons-solid/Home';
 import {colors, spacing} from '../theme';
 import sendToAirtable from '../modules/send-to-airtable';
 
@@ -10,8 +14,25 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     const [isHidden, updateIsHidden] = useState(true);
     const [isClosed, setIsClosed] = useState(false);
     useEffect(() => {
-        console.log('working1')
-      })
+        console.log(revealBar, isBrowser(), showByDefault, window)
+        const toggleBar = () => {
+            console.log('here');
+            if ((document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) && !isClosed) {
+                updateIsHidden(false);
+            } else {
+                 updateIsHidden(true);
+            }
+        }
+        if(revealBar) updateIsHidden(false);
+        if(isBrowser && !isClosed && showByDefault)  {
+            const user = localStorage.getItem("csb-newsletter-signup");
+            if(user) return;
+            window.addEventListener("scroll", toggleBar);
+        } else {
+            window.removeEventListener("scroll", toggleBar);
+        }
+        return () => window.removeEventListener("scroll", toggleBar);
+    })
     const submitForm = (e) => {
         e.preventDefault();
         const email = document.querySelector('[name="email"]').value;
