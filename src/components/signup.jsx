@@ -14,25 +14,6 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     const [isHidden, updateIsHidden] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [isClosed, setIsClosed] = useState(false);
-    const submitForm = (e) => {
-        e.preventDefault();
-        const email = document.querySelector('[name="email"]').value;
-        if(email) {
-            sendToAirtable({
-                fields: { email },
-                airBase: 'appL54UW2jm7wOYzl',
-                table: 'Emails',
-            })
-            .then(res => {
-                localStorage.setItem('csb-newsletter-signup', email);
-                setIsClosed(true);
-                stopRevealBar(false);
-                updateIsHidden(true);
-                return isBrowser() ? window.onscroll = undefined : null;
-            })
-            .catch(err =>  console.log(err))
-        }
-    }
     useEffect(() => {
         try {
         console.log(revealBar, isBrowser(), showByDefault, window)
@@ -56,7 +37,26 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
         console.log(exception)
     }
         return () => window.removeEventListener("scroll", toggleBar);
-    }, [isHidden, isClosed, revealBar, stopRevealBar ])
+    },[])
+    const submitForm = (e) => {
+        e.preventDefault();
+        const email = document.querySelector('[name="email"]').value;
+        if(email) {
+            sendToAirtable({
+                fields: { email },
+                airBase: 'appL54UW2jm7wOYzl',
+                table: 'Emails',
+            })
+            .then(res => {
+                localStorage.setItem('csb-newsletter-signup', email);
+                setIsClosed(true);
+                stopRevealBar(false);
+                updateIsHidden(true);
+                return isBrowser() ? window.onscroll = undefined : null;
+            })
+            .catch(err =>  console.log(err))
+        }
+    }
     return !isHidden ? (
         <div className={className}>
             <button className="close" onClick={() => {
