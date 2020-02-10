@@ -12,7 +12,6 @@ const isBrowser = () => typeof window !== 'undefined' && window;
 
 const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     const [isHidden, updateIsHidden] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
     const [isClosed, setIsClosed] = useState(false);
     useEffect(() => {
         try {
@@ -37,7 +36,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
         console.log(exception)
     }
         return () => window.removeEventListener("scroll", toggleBar);
-    },[])
+    })
     const submitForm = (e) => {
         e.preventDefault();
         const email = document.querySelector('[name="email"]').value;
