@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import { Link, graphql } from "gatsby"
 import styled from 'styled-components';
 import SEO from "../components/seo"
@@ -124,6 +124,9 @@ const selectors = [{
 
 const ReviewTemplate = ({ className, data }) => {
     const { coffeeshop } = data.prismic;
+    useEffect(() => {
+        console.log('working2')
+      })
     return coffeeshop && coffeeshop.has_rating ? (
     <div className={className}>
         <SEO title={`A detailed review of ${coffeeshop.name[0].text}`} />

@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { Link, graphql } from "gatsby"
 import styled from 'styled-components';
 import {CaretDownCircle} from 'styled-icons/boxicons-solid/CaretDownCircle';
@@ -30,6 +30,9 @@ const Hero = ({ className }) => (
 
 const IndexPage = ({ data, className }) => {
   const [showSignup, setShowSignup] = useState(false);
+  useEffect(() => {
+    console.log('working')
+  })
   const { allCoffeeshops } = data.prismic;
   const totalShops = allCoffeeshops.edges.length;
   const rankedShops = allCoffeeshops.edges.sort((a,b) => (a.node.rank || totalShops) - (b.node.rank || totalShops))
