@@ -38,7 +38,7 @@ const IndexPage = ({ data, className }) => {
   const rankedShops = allCoffeeshops.edges.sort((a,b) => (a.node.rank || totalShops) - (b.node.rank || totalShops))
   return (
     <div className={className}>
-      <SEO title="Coffee shops of Bath" />
+      {/* <SEO title="Coffee shops of Bath" /> */}
       <Header />
       <Hero></Hero>
       <div className="PageTitle">

@@ -129,7 +129,7 @@ const ReviewTemplate = ({ className, data }) => {
       })
     return coffeeshop && coffeeshop.has_rating ? (
     <div className={className}>
-        <SEO title={`A detailed review of ${coffeeshop.name[0].text}`} />
+        {/* <SEO title={`A detailed review of ${coffeeshop.name[0].text}`} /> */}
         <Header />
         <Hero
           name={coffeeshop.name[0].text}
