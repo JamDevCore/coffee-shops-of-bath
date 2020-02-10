@@ -6,9 +6,9 @@
 
 // You can delete this file if you're not using it
 
-const setScroll = require('./src/modules/set-scroll');
+// const setScroll = require('./src/modules/set-scroll');
 
 
-exports.onClientEntry = () => {
-    setScroll();
-  }
+// exports.onClientEntry = () => {
+//     setScroll();
+//   }
