@@ -28,7 +28,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
                 setIsClosed(true);
                 stopRevealBar(false);
                 updateIsHidden(true);
-                return isBrowser ? window.onscroll = undefined : null;
+                return isBrowser() ? window.onscroll = undefined : null;
             })
             .catch(err =>  console.log(err))
         }
