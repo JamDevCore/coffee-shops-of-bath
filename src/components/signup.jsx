@@ -34,6 +34,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
         }
     }
     useEffect(() => {
+        try {
         console.log(revealBar, isBrowser(), showByDefault, window)
         const toggleBar = () => {
             console.log('here');
@@ -51,6 +52,9 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
         } else {
             window.removeEventListener("scroll", toggleBar);
         }
+    } catch (exception) {
+        console.log(exception)
+    }
         return () => window.removeEventListener("scroll", toggleBar);
     }, [isHidden, isClosed, revealBar, stopRevealBar ])
     return !isHidden ? (
