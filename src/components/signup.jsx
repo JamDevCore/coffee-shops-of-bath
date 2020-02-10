@@ -14,9 +14,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
     const [isHidden, updateIsHidden] = useState(true);
     const [isClosed, setIsClosed] = useState(false);
     useEffect(() => {
-        console.log(revealBar, isBrowser(), showByDefault, window)
         const toggleBar = () => {
-            console.log('here');
             if ((document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) && !isClosed) {
                 updateIsHidden(false);
             } else {

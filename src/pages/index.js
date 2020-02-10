@@ -38,7 +38,10 @@ const IndexPage = ({ data, className }) => {
   const rankedShops = allCoffeeshops.edges.sort((a,b) => (a.node.rank || totalShops) - (b.node.rank || totalShops))
   return (
     <div className={className}>
-      {/* <SEO title="Coffee shops of Bath" /> */}
+      <SEO title="Coffee shops of Bath" description="Discover the best coffee shops in Bath. Read in (obsessive) detail
+          about their quirks and charms, and ultimately where to get the best cup.
+          Written by a Bath local who spends way too much time (and money) 
+          on the good stuff." />
       <Header />
       <Hero></Hero>
       <div className="PageTitle">
