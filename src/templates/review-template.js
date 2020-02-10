@@ -48,7 +48,7 @@ a {
         font-size: ${fonts.h2};
         color: ${colors.blue};
     }
-    a {
+    p {
         font-size: 12px;
         color: ${colors.grey};
     }
@@ -136,11 +136,11 @@ const ReviewTemplate = ({ className, data }) => {
         />
         <Selector>
             {selectors.map(({ label, icon, review }) => (
-                <a href={`#${review}`}>
+                <a key={label} href={`#${review}`}>
                 <div key={label} className="SelectorBox">
                     {icon()}
                     <h2>{label}</h2>
-                    <a href={`#${review}`}>Read in full</a>
+                    <p>Read in full</p>
                 </div>
                 </a>
             ))}

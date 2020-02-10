@@ -11,7 +11,7 @@ const Header = ({ className }) => (
     <div className={className}>
         <a href="mailto:jamesvitaly1993@gmail.com"><PaperPlane  size="30" /></a>
         <a href="https://www.linkedin.com/in/james-vitaly-harding"><Linkedin  size="30" /></a>
-        <Link className="home"><Home size="30"/></Link>
+        <Link className="home" to="/"><Home size="30"/></Link>
     </div>
 );
 
