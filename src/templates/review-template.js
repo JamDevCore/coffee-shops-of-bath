@@ -39,7 +39,7 @@ a {
     background: white;
     height: 120px;
     text-align: center;
-    padding: ${spacing.medium};
+    padding: ${spacing.medium} 0;
     svg {
         margin-top: ${spacing.medium};
         color: ${colors.yellow};
