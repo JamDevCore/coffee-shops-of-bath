@@ -8,6 +8,7 @@ import ShopListItem from '../components/shop-list-item';
 import background from '../images/csb_bg.png';
 import Signup from '../components/signup';
 import coffee from '../images/open-doodles-coffee.png';
+import reading from '../images/open-doodles-reading-side.png';
 import {colors, spacing, fonts} from '../theme';
 
 
@@ -30,9 +31,6 @@ const Hero = ({ className }) => (
 
 const IndexPage = ({ data, className }) => {
   const [showSignup, setShowSignup] = useState(false);
-  useEffect(() => {
-    console.log('working')
-  })
   const { allCoffeeshops } = data.prismic;
   const totalShops = allCoffeeshops.edges.length;
   const rankedShops = allCoffeeshops.edges.sort((a,b) => (a.node.rank || totalShops) - (b.node.rank || totalShops))
@@ -69,7 +67,12 @@ const IndexPage = ({ data, className }) => {
           })}
       </ul>
       </div>
+      
       <Signup revealBar={showSignup} stopRevealBar={setShowSignup}/>
+      <div className="credit">
+        <img src={reading} alt="Reading a book doodle" />
+         <a  href="https://icons8.com">Images from Icons8</a>
+        </div>
    </div>)
 };
 
@@ -99,10 +102,6 @@ export default styled(IndexPage)`
       padding-bottom: ${spacing.medium};
       margin: 0 auto ${spacing.large};
     }
-      img {
-        margin: 30px auto 20px;
-        width: 180px;
-      }
       svg {
         color: ${colors.blue};
         text-align: center;
@@ -138,6 +137,18 @@ export default styled(IndexPage)`
     list-style-type: none;
     padding: 0;
     margin: 0;
+  }
+  .credit {
+    font-size: 12px;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  img {
+    margin: 30px auto 20px;
+    width: 180px;
   }
 `
 export const query = graphql`

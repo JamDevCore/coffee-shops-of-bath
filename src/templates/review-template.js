@@ -14,6 +14,7 @@ import {Cake3} from 'styled-icons/remix-fill/Cake3';
 import Feature from '../components/feature';
 import Rating from '../components/rating';
 import Signup from '../components/signup';
+import reading from '../images/open-doodles-reading-side.png';
 
 const Selector = styled.section`
 max-width: 1100px;
@@ -38,6 +39,7 @@ a {
     background: white;
     height: 120px;
     text-align: center;
+    padding: ${spacing.medium};
     svg {
         margin-top: ${spacing.medium};
         color: ${colors.yellow};
@@ -174,7 +176,12 @@ const ReviewTemplate = ({ className, data }) => {
                     </div>
                 </div>
             </div>
-        </section>
+        </section> 
+        <div className="credit">
+        <img src={reading} alt="Reading a book" />
+        <a  href="https://icons8.com" className="credit">Images from Icons8</a>
+        </div>
+        
         <Signup showByDefault stopRevealBar={() => {}}/>
     </div>
     ) : <h1>Coming Soon</h1>
@@ -257,10 +264,6 @@ export default styled(ReviewTemplate)`
         padding-bottom: ${spacing.medium};
         margin: 0 auto ${spacing.large};
         }
-        img {
-            margin: 30px auto 20px;
-            width: 180px;
-        }
         svg {
             color: ${colors.blue};
             text-align: center;
@@ -327,6 +330,17 @@ export default styled(ReviewTemplate)`
         }
     }
     }
+}
+img {
+    margin: 30px auto 20px;
+    width: 180px;
+}
+.credit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
 }
 `;
 
