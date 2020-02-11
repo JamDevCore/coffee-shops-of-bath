@@ -13,6 +13,20 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        // The property ID; the tracking code won't be generated without it
+        trackingId: "UA-146538354-2",
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        sampleRate: 5,
+        siteSpeedSampleRate: 10,
+        cookieDomain: "bathcoffee.co",
+        },
+      },
+     {
       resolve: 'gatsby-source-prismic-graphql',
         options: {
           repositoryName: 'coffeeshopsofbath', // (REQUIRED, replace with your own)
