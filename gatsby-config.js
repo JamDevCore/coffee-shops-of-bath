@@ -10,6 +10,7 @@ module.exports = {
     title: `Coffee shops of Bath`,
     description: `Discover the best coffee shops in Bath. Read in (obsessive) details about their quirks and charms, and ultimately where to get the best cup. Written by a Bath local who spends way too much time (and money) on the good stuff.`,
     author: `JamesVitaly`,
+    siteUrl: `https://bathcoffee.co`,
   },
   plugins: [
      {
@@ -25,6 +26,7 @@ module.exports = {
           }],
       }
     },
+    'gatsby-plugin-sitemap',
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
