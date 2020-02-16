@@ -18,6 +18,8 @@ module.exports = {
         options: {
           repositoryName: 'coffeeshopsofbath', // (REQUIRED, replace with your own)
           accessToken: process.env.GATSBY_ACCESS_TOKEN,
+          previews: false,
+          omitScript: true,
           pages: [{ // (optional, builds pages dynamically)
             type: 'Coffeeshop', 
             path: '/:uid',        // TypeName from prismic

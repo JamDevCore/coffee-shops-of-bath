@@ -2,9 +2,12 @@ import React from "react"
 import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import card from '../images/seo-banner.png';
 
-function SEO({ description, lang, meta, title }) {
-  const metaDescription = description || 'Discover the best coffee shops in Bath. Read in (obsessive) details about their quirks and charms, and ultimately where to get the best cup. Written by a Bath local who spends way too much time (and money) on the good stuff.'
+function SEO({ description, lang, meta, title, image }) {
+  const metaDescription = description || 'Discover the best coffee shops in Bath. Read in (obsessive) details about their quirks and charms, and ultimately where to get the best cup. Written by a Bath local who spends way too much time (and money) on the good stuff.';
+  const pageImage = image || card;
+  const metaTitle = title || 'Coffee Shops of Bath';
   return (
     <Helmet
       htmlAttributes={{
@@ -47,7 +50,22 @@ function SEO({ description, lang, meta, title }) {
         },
       ].concat(meta)}
     >
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146538354-2"></script>
+      <meta data-react-helmet="true" name="description" content={metaDescription} />
+      <meta data-react-helmet="true" name="title" content={metaTitle} />
+      <meta data-react-helmet="true" name="image" content={pageImage} />
+      <meta data-react-helmet="true" property="og:description" content={metaDescription} />
+      <meta data-react-helmet="true" property="og:image:width" content="300" />
+      <meta data-react-helmet="true" property="og:image:height" content="200" />
+      <meta data-react-helmet="true" property="og:image" content={pageImage} />
+      <meta data-react-helmet="true" property="og:title" content={metaTitle} />
+      <meta data-react-helmet="true" name="og:title" content={metaTitle} />
+      <meta data-react-helmet="true" property="og:description" content={metaDescription} />
+      <meta data-react-helmet="true" property="og:type" content="website" />
+      <meta data-react-helmet="true" name="twitter:card" content="summary" />
+      <meta data-react-helmet="true" name="twitter:creator" content="@jamesvitaly" />
+      <meta data-react-helmet="true" name="twitter:title" content={metaTitle} />
+      <meta data-react-helmet="true" name="twitter:description" content={metaDescription} />
+      <meta data-react-helmet="true" name="twitter:image" content={pageImage} />
       <script>
         {`window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
