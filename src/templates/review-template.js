@@ -74,7 +74,7 @@ const ComingSoon = ({ coffeeshop, setShowSignup }) => {
         <>
             <Header />
             <Hero
-              name={coffeeshop.name[0].text}
+              name={coffeeshop && coffeeshop.name && coffeeshop.name[0].text}
               setShowSignup={setShowSignup}
               summary="Coming soon! Stay tuned for this review, and don't forget to subscribe for updates"
             />
