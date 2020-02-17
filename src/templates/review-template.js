@@ -1,5 +1,5 @@
-import React, {useEffect} from "react"
-import { Link, graphql } from "gatsby"
+import React, {useState} from "react"
+import { graphql } from "gatsby"
 import styled from 'styled-components';
 import SEO from "../components/seo"
 import Header from '../components/header';
@@ -15,6 +15,7 @@ import Feature from '../components/feature';
 import Rating from '../components/rating';
 import Signup from '../components/signup';
 import reading from '../images/open-doodles-reading-side.png';
+import Button from '../components/Button';
 
 const Selector = styled.section`
 max-width: 1100px;
@@ -68,6 +69,19 @@ a {
 }
 `;
 
+const ComingSoon = ({ coffeeshop, setShowSignup }) => {
+    return (
+        <>
+            <Header />
+            <Hero
+              name={coffeeshop.name[0].text}
+              setShowSignup={setShowSignup}
+              summary="Coming soon! Stay tuned for this review, and don't forget to subscribe for updates"
+            />
+        </>
+    );
+}
+
 const Review = ({
     rating,
     review,
@@ -84,8 +98,8 @@ const Review = ({
            <div className="ReviewFeatureWrapper">
                <Feature>{feature}</Feature>
             </div> 
-            {review.map(({ text }) => (
-                <p>{text}</p>
+            {review.map(({ text }, index) => (
+                <p key={`${text.substr(0, 10)}-${index}`}>{text}</p>
             ))}
         </article>
     )
@@ -96,6 +110,7 @@ const Hero = ({
     summary,
     feature,
     rating,
+    setShowSignup,
 }) => {
     return (
         <div className="Hero">
@@ -105,14 +120,21 @@ const Hero = ({
             <h1>{name}</h1>
             <p>{summary}</p>
             <br />
-            <Feature>{feature}</Feature>
+            {feature ? <Feature>{feature}</Feature> : 
+            <Button
+              onClick={() => setShowSignup(true)}
+              className="subscribe">
+                Subscribe for updates
+            </Button>}
             <div className="OverallRating">
-                <Rating rating={rating} />
+                {rating && <Rating rating={rating} />}
             </div>
-
         </div>
-        <p>Find out more</p>
-        <a href="#review"><CaretDownCircle size="25" /></a>
+         {rating && <>
+            <p>Find out more</p>
+             <a href="#review">
+                 <CaretDownCircle size="25" />
+             </a></>}
     </div>)
 };
 
@@ -125,6 +147,7 @@ const selectors = [{
     }];
 
 const ReviewTemplate = ({ className, data }) => {
+    const [showSignup, setShowSignup] = useState(false);
     const { coffeeshop } = data.prismic;
     return coffeeshop && coffeeshop.has_rating ? (
     <div className={className}>
@@ -182,9 +205,13 @@ const ReviewTemplate = ({ className, data }) => {
         <a  href="https://icons8.com" className="credit">Images from Icons8</a>
         </div>
         
-        <Signup showByDefault stopRevealBar={() => {}}/>
+        <Signup showByDefault revealBar={showSignup} stopRevealBar={() => {}}/>
     </div>
-    ) : <h1>Coming Soon</h1>
+    ) :
+    <div className={className}>
+        <ComingSoon coffeeshop={coffeeshop} setShowSignup={setShowSignup} />
+        <Signup revealBar={showSignup} stopRevealBar={setShowSignup}/>
+    </div>
 }
 
 export default styled(ReviewTemplate)`
@@ -263,6 +290,7 @@ export default styled(ReviewTemplate)`
         border-bottom: 3px solid ${colors.blue};
         padding-bottom: ${spacing.medium};
         margin: 0 auto ${spacing.large};
+        display: inline-block;
         }
         svg {
             color: ${colors.blue};

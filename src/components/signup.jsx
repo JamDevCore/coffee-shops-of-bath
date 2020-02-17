@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react"
-import { Link } from 'gatsby';
 import styled from 'styled-components';
 import {Times} from 'styled-icons/fa-solid/Times';
-import {Linkedin} from 'styled-icons/fa-brands/Linkedin'
-import {FacebookSquare} from 'styled-icons/fa-brands/FacebookSquare';
-import {Home} from 'styled-icons/boxicons-solid/Home';
 import {colors, spacing} from '../theme';
 import sendToAirtable from '../modules/send-to-airtable';
 
@@ -21,7 +17,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
                  updateIsHidden(true);
             }
         }
-        if(revealBar) updateIsHidden(false);
+        if(revealBar ) updateIsHidden(false);
         if(isBrowser && !isClosed && showByDefault)  {
             const user = localStorage.getItem("csb-newsletter-signup");
             if(user) return;
@@ -30,7 +26,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
             window.removeEventListener("scroll", toggleBar);
         }
         return () => window.removeEventListener("scroll", toggleBar);
-    })
+    }, [revealBar, isClosed])
     const submitForm = (e) => {
         e.preventDefault();
         const email = document.querySelector('[name="email"]').value;
@@ -50,6 +46,7 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
             .catch(err =>  console.log(err))
         }
     }
+    console.log(isHidden)
     return !isHidden ? (
         <div className={className}>
             <button className="close" onClick={() => {

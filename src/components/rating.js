@@ -2,7 +2,7 @@ import React from "react"
 import styled from 'styled-components';
 import {Star} from 'styled-icons/fa-solid/Star';
 import {StarHalf} from 'styled-icons/fa-solid/StarHalf';
-import {colors, spacing, fonts} from '../theme';
+import {colors, spacing } from '../theme';
 
 const Rating = ({
     className,

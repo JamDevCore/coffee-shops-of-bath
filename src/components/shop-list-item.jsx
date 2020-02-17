@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {colors, spacing, fonts} from '../theme';
 import Feature from './feature';
 import Rating from './rating';
+import Button from '../components/Button';
 
 const ComingSoon = styled.li`
     display: flex;
@@ -49,9 +50,8 @@ const ShopListItem = ({
     comingSoon,
     setShowSignup,
 }) => {
-
     return !comingSoon ? (
-    <li className={className}>
+    <li className={className} >
         <div className="ItemHeader">
             <div className="Left"><h3>{name.text}</h3><span className="Rank">{`No. ${rank}`}</span></div>
             <Feature>{feature.text}</Feature>
@@ -66,11 +66,11 @@ const ShopListItem = ({
                 <h3>{name.text}</h3>
                 <p>Full report coming soon...</p>
                 </div>
-                <button
+                <Button
                     onClick={() => setShowSignup(true)}
                     className="subscribe">
                         Subscribe for updates
-                    </button>
+                </Button>
              </ComingSoon>
     );
 }
