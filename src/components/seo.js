@@ -99,8 +99,8 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
               "@type": "GeoCoordinates",
               "latitude": 40.761293,
               "longitude": -73.982294
-            },
-          }
+            }
+          },
           "reviewRating": {
             "@type":"Rating",
             "worstRating":1,
