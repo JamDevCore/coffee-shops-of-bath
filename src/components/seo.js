@@ -82,7 +82,7 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
             "name":"James Harding"
           },
           "url": "${typeof window !== 'undefined' && window.location.href}",
-          "datePublished": ${coffeeshop._meta.lastPublicationDate},
+          "datePublished": "${coffeeshop._meta.lastPublicationDate}",
           "publisher": {
               "@type":"Organization",
               "name": "Coffee shops of Bath",
