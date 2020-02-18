@@ -46,7 +46,6 @@ const Signup = ({ className, showByDefault, revealBar, stopRevealBar }) => {
             .catch(err =>  console.log(err))
         }
     }
-    console.log(isHidden)
     return !isHidden ? (
         <div className={className}>
             <button className="close" onClick={() => {

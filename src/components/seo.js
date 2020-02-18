@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import card from '../images/seo-banner.png';
 
-function SEO({ description, lang, meta, title, image }) {
+function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
   const metaDescription = description || 'Discover the best coffee shops in Bath. Read in (obsessive) details about their quirks and charms, and ultimately where to get the best cup. Written by a Bath local who spends way too much time (and money) on the good stuff.';
   const pageImage = image || card;
   const metaTitle = title || 'The Best Coffee Shops of Bath';
@@ -72,7 +72,43 @@ function SEO({ description, lang, meta, title, image }) {
 
         gtag('config', 'UA-146538354-2');`}
         </script>
-
+        {isReview && (<script type="application/ld+json">
+        {`
+        {
+          "@context":"https://schema.org",
+          "@type":"Review",
+          "author": {
+            "@type":"Person",
+            "name":"James Harding",
+          },
+          "url": ${typeof window !== 'undefined' && window.location.href},
+          "datePublished": ${coffeeshop._meta.lastPublicationDate},
+          "publisher": {
+              "@type":"Organization",
+              "name": "Coffee shops of Bath",
+              "sameAs":"https://bathcoffee.co
+          },
+          "description":${coffeeshop.summary[0].text},
+          "inLanguage":"en",
+          "itemReviewed": {
+            "@type":"Coffeeshop",
+            "name": ${coffeeshop.name[0].text},
+            "sameAs": ${coffeeshop.website.url},
+            "servesCuisine": "Coffee",
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": 40.761293,
+              "longitude": -73.982294
+            },
+          },
+          "reviewRating": {
+            "@type":"Rating",
+            "worstRating":1,
+            "bestRating":5,
+            "ratingValue":${coffeeshop.rating}
+          }
+        }`}
+        </script>)}
       </Helmet>
   )
 }

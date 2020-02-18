@@ -151,7 +151,12 @@ const ReviewTemplate = ({ className, data }) => {
     const { coffeeshop } = data.prismic;
     return coffeeshop && coffeeshop.has_rating ? (
     <div className={className}>
-        <SEO title={`A detailed review of ${coffeeshop.name[0].text}`} description={coffeeshop.summary[0].text} />
+        <SEO
+          title={`A detailed review of ${coffeeshop.name[0].text}`}
+          description={coffeeshop.summary[0].text}
+          coffeeshop={coffeeshop}
+          isReview
+        />
         <Header />
         <Hero
           name={coffeeshop.name[0].text}
@@ -188,7 +193,7 @@ const ReviewTemplate = ({ className, data }) => {
             <div className="sidebar-container">
                 <div className="sidebar">
                     <div className="sidebar-item address">
-                        {coffeeshop.address.map(line => <h5>{line.text}</h5>)}
+                        {coffeeshop.address.map(line => <h5 key={line.text}>{line.text}</h5>)}
                         <a href={coffeeshop.website.url}>{coffeeshop.website.url}</a>
                         <a href={coffeeshop.facebook_page.url}><FacebookSquare size="30" /></a>
                     </div>
@@ -412,6 +417,7 @@ query CoffeeShopSingleQuery($uid: String!) {
         coffee_rating
         _meta {
           uid
+          lastPublicationDate
         }
       }
     }
