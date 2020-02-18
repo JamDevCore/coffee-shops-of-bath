@@ -88,12 +88,12 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
               "name": "Coffee shops of Bath",
               "sameAs":"https://bathcoffee.co"
           },
-          "description":${coffeeshop.summary[0].text},
+          "description": "${coffeeshop.summary[0].text}",
           "inLanguage":"en",
           "itemReviewed": {
             "@type":"Coffeeshop",
-            "name": ${coffeeshop.name[0].text},
-            "sameAs": ${coffeeshop.website.url},
+            "name": "${coffeeshop.name[0].text}",
+            "sameAs": "${coffeeshop.website.url}",
             "servesCuisine": "Coffee",
             "geo": {
               "@type": "GeoCoordinates",
