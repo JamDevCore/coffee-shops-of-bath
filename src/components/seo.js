@@ -81,7 +81,7 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
             "@type":"Person",
             "name":"James Harding"
           },
-          "url": ${typeof window !== 'undefined' && window.location.href},
+          "url": "${typeof window !== 'undefined' && window.location.href}",
           "datePublished": ${coffeeshop._meta.lastPublicationDate},
           "publisher": {
               "@type":"Organization",
@@ -99,7 +99,7 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
               "@type": "GeoCoordinates",
               "latitude": 40.761293,
               "longitude": -73.982294
-            }
+            },
           },
           "reviewRating": {
             "@type":"Rating",
