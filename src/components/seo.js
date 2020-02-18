@@ -86,7 +86,7 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
           "publisher": {
               "@type":"Organization",
               "name": "Coffee shops of Bath",
-              "sameAs":"https://bathcoffee.co
+              "sameAs":"https://bathcoffee.co"
           },
           "description":${coffeeshop.summary[0].text},
           "inLanguage":"en",
