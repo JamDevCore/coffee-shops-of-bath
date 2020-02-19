@@ -94,7 +94,7 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
             "@type":"Organization",
             "name": "${coffeeshop.name[0].text}",
             "sameAs": "${coffeeshop.website.url}",
-            "servesCuisine": "Coffee",
+            "servesCuisine": "Coffee"
           },
           "reviewRating": {
             "@type":"Rating",
