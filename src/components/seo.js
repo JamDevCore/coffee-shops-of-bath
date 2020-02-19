@@ -91,15 +91,10 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
           "description": "${coffeeshop.summary[0].text}",
           "inLanguage":"en",
           "itemReviewed": {
-            "@type":"Coffeeshop",
+            "@type":"Organization",
             "name": "${coffeeshop.name[0].text}",
             "sameAs": "${coffeeshop.website.url}",
             "servesCuisine": "Coffee",
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": 40.761293,
-              "longitude": -73.982294
-            }
           },
           "reviewRating": {
             "@type":"Rating",
