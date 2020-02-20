@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import card from '../images/seo-banner.png';
 
-function SEO({ description, lang, meta, title, image, coffeeshop, isReview, path }) {
+function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
   const metaDescription = description || 'Discover the best coffee shops in Bath. Read in (obsessive) details about their quirks and charms, and ultimately where to get the best cup. Written by a Bath local who spends way too much time (and money) on the good stuff.';
   const pageImage = image || card;
   const metaTitle = title || 'The Best Coffee Shops of Bath';
