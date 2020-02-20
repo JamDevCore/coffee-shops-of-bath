@@ -49,6 +49,7 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
         },
       ].concat(meta)}
     >
+    
       {path && <link rel="canonical" href={`https://bathcoffee/${path}`} />}
       <meta data-react-helmet="true" name="description" content={metaDescription} />
       <meta data-react-helmet="true" name="title" content={metaTitle} />
