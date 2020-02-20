@@ -28,7 +28,6 @@ module.exports = {
           }],
       }
     },
-    'gatsby-plugin-sitemap',
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
