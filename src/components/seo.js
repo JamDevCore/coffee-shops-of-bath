@@ -13,7 +13,6 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
         lang,
       }}
       title={title}
-      titleTemplate={`%s | ${title}`}
       meta={[
         {
           name: `description`,
@@ -91,7 +90,7 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
           "description": "${coffeeshop.summary[0].text}",
           "inLanguage":"en",
           "itemReviewed": {
-            "@type":"Organization",
+            "@type":"LocalBusiness",
             "name": "${coffeeshop.name[0].text}",
             "sameAs": "${coffeeshop.website.url}",
             "servesCuisine": "Coffee"
