@@ -3,10 +3,11 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import card from '../images/seo-banner.png';
 
-function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
+function SEO({ description, lang, meta, title, image, coffeeshop, isReview, path }) {
   const metaDescription = description || 'Discover the best coffee shops in Bath. Read in (obsessive) details about their quirks and charms, and ultimately where to get the best cup. Written by a Bath local who spends way too much time (and money) on the good stuff.';
   const pageImage = image || card;
   const metaTitle = title || 'The Best Coffee Shops of Bath';
+  const path = coffeeshop && coffeeshop._meta.uid;
   return (
     <Helmet
       htmlAttributes={{
@@ -48,6 +49,7 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
         },
       ].concat(meta)}
     >
+      {path && <link rel="canonical" href={`https://bathcoffee/${path}`} />}
       <meta data-react-helmet="true" name="description" content={metaDescription} />
       <meta data-react-helmet="true" name="title" content={metaTitle} />
       <meta data-react-helmet="true" name="image" content={pageImage} />
