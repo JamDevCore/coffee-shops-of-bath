@@ -49,7 +49,13 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
         },
       ].concat(meta)}
     >
-    
+      <script>
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-146538354-2');`}
+        </script>
       {path && <link rel="canonical" href={`https://bathcoffee/${path}`} />}
       <meta data-react-helmet="true" name="description" content={metaDescription} />
       <meta data-react-helmet="true" name="title" content={metaTitle} />
@@ -67,13 +73,6 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
       <meta data-react-helmet="true" name="twitter:title" content={metaTitle} />
       <meta data-react-helmet="true" name="twitter:description" content={metaDescription} />
       <meta data-react-helmet="true" name="twitter:image" content={pageImage} />
-      <script>
-        {`window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-146538354-2');`}
-        </script>
         {isReview && (<script type="application/ld+json">
         {`
         {
