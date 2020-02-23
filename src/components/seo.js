@@ -49,13 +49,15 @@ function SEO({ description, lang, meta, title, image, coffeeshop, isReview }) {
         },
       ].concat(meta)}
     >
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146538354-2"></script>
       <script>
-        {`window.dataLayer = window.dataLayer || [];
+      {`window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
         gtag('config', 'UA-146538354-2');`}
-        </script>
+      </script>
+
       {path && <link rel="canonical" href={`https://bathcoffee/${path}`} />}
       <meta data-react-helmet="true" name="description" content={metaDescription} />
       <meta data-react-helmet="true" name="title" content={metaTitle} />
