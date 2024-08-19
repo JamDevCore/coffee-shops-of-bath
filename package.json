@@ -7,7 +7,7 @@
   "dependencies": {
     "airtable": "^0.8.1",
     "babel-plugin-styled-components": "^1.10.7",
-    "gatsby": "^2.18",
+    "gatsby": "^4.25",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-manifest": "^2.2.39",
     "gatsby-plugin-offline": "^3.0.32",
